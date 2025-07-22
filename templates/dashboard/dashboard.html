@@ -1,0 +1,572 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ValidatorAI - Validate Your Startup Idea</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: float 6s infinite ease-in-out;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.7; }
+        }
+        .animate-bounce {
+            animation: bounce 1s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-25%); }
+        }
+        .hidden { display: none; }
+        .guide-popup {
+            backdrop-filter: blur(20px);
+        }
+             .register-btn {
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            /* Purple gradient */
+            border: none;
+            border-radius: 50px;
+            /* Rounded button */
+            backdrop-filter: blur(10px);
+            /* Glass effect */
+            box-shadow: 0 8px 20px rgba(118, 75, 162, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 24px rgba(118, 75, 162, 0.6);
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            /* Pink gradient on hover */
+        }
+
+        .register-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 12px rgba(118, 75, 162, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 relative overflow-hidden">
+        <!-- Floating Particles -->
+        <div class="floating-particles">
+            <div class="particle" style="left: 10%; top: 20%; animation-delay: 0s;"></div>
+            <div class="particle" style="left: 30%; top: 35%; animation-delay: 1s;"></div>
+            <div class="particle" style="left: 50%; top: 50%; animation-delay: 2s;"></div>
+            <div class="particle" style="left: 70%; top: 30%; animation-delay: 3s;"></div>
+            <div class="particle" style="left: 90%; top: 10%; animation-delay: 4s;"></div>
+        </div>
+
+        <!-- Guide Popup -->
+        <div id="guidePopup" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+            <div class="absolute inset-0 bg-black/20 backdrop-blur-md transition-all duration-300" onclick="closeGuide()"></div>
+            <div class="relative bg-white rounded-3xl p-8 max-w-md w-full max-h-[80vh] overflow-y-auto shadow-2xl transform transition-all duration-500 scale-100">
+                <button onclick="closeGuide()" class="absolute top-4 right-4 p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-all duration-200">
+                    <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+
+                <div class="text-gray-800">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3l14 9-14 9V3z"></path>
+                        </svg>
+                        Goals Guide
+                    </h3>
+
+                    <div class="space-y-6">
+                        <div class="bg-blue-50 rounded-2xl p-4 border border-blue-100">
+                            <h4 class="font-semibold mb-2 text-blue-800">🎯 Business Vision</h4>
+                            <p class="text-sm text-gray-700">Define your long-term mission and what you want to achieve with your startup.</p>
+                        </div>
+
+                        <div class="bg-green-50 rounded-2xl p-4 border border-green-100">
+                            <h4 class="font-semibold mb-2 text-green-800">💰 Monetization</h4>
+                            <p class="text-sm text-gray-700">Explain how you'll generate revenue - subscription, one-time payment, freemium, etc.</p>
+                        </div>
+
+                        <div class="bg-purple-50 rounded-2xl p-4 border border-purple-100">
+                            <h4 class="font-semibold mb-2 text-purple-800">🌍 Social Impact</h4>
+                            <p class="text-sm text-gray-700">Describe the positive change your startup will create in society.</p>
+                        </div>
+
+                        <div class="bg-orange-50 rounded-2xl p-4 border border-orange-100">
+                            <h4 class="font-semibold mb-2 text-orange-800">⏱ Timeline</h4>
+                            <p class="text-sm text-gray-700">Set short-term and long-term milestones with realistic timeframes.</p>
+                        </div>
+
+                        <div class="bg-pink-50 rounded-2xl p-4 border border-pink-100">
+                            <h4 class="font-semibold mb-2 text-pink-800">📈 Success Metrics</h4>
+                            <p class="text-sm text-gray-700">Define how you'll measure success - user growth, revenue targets, market share.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Navigation -->
+        <nav class="bg-white/95 backdrop-blur-xl shadow-lg px-6 py-4 sticky top-0 z-40 transition-all duration-300">
+            <div class="flex items-center justify-between">
+                <div class="text-2xl font-bold text-gray-800 flex items-center gap-3">🚀 ValidatorAI</div>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="{% url 'dashboard' %}" class="text-gray-600 hover:text-gray-800 px-4 py-2 rounded-full hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500 hover:text-white transition-all duration-200 hover:-translate-y-0.5">Dashboard</a>
+                    <a href="#analytics" class="text-gray-600 hover:text-gray-800 px-4 py-2 rounded-full hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500 hover:text-white transition-all duration-200 hover:-translate-y-0.5">Analytics</a>
+                    <a href="#reports" class="text-gray-600 hover:text-gray-800 px-4 py-2 rounded-full hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500 hover:text-white transition-all duration-200 hover:-translate-y-0.5">Reports</a>
+                    <a href="#help" class="text-gray-600 hover:text-gray-800 px-4 py-2 rounded-full hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500 hover:text-white transition-all duration-200 hover:-translate-y-0.5">Help</a>
+                    <button>
+                <a href="{% url 'home' %}" class="register-btn">Logout</a>
+            </button>
+                </div>
+                <div class="w-10 h-10 bg-gradient-to-r from-pink-500 to-orange-500 rounded-full flex items-center justify-center text-white font-bold cursor-pointer hover:scale-110 transition-all duration-200 shadow-lg">U</div>
+            </div>
+        </nav>
+
+        <div class="flex flex-1">
+            <!-- Sidebar -->
+            <aside class="bg-white/95 backdrop-blur-xl shadow-xl w-80 p-6 hidden lg:block">
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-xs font-bold text-gray-600 uppercase tracking-wider mb-4">Analysis Tools</h3>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="#idea-form" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 text-white hover:from-indigo-600 hover:to-purple-600 transition-all duration-200 hover:translate-x-1">
+                                    <span>📝</span>
+                                    <span>Idea Validation Form</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#swot" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500 hover:text-white transition-all duration-200 hover:translate-x-1">
+                                    <span>📊</span>
+                                    <span>SWOT Analysis</span>
+                                    <span class="ml-auto bg-red-500 text-white text-xs px-2 py-1 rounded-full">AI</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#scores" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500 hover:text-white transition-all duration-200 hover:translate-x-1">
+                                    <span>📈</span>
+                                    <span>Feasibility Scores</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#monetization" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500 hover:text-white transition-all duration-200 hover:translate-x-1">
+                                    <span>💰</span>
+                                    <span>Monetization Analysis</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#risk" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500 hover:text-white transition-all duration-200 hover:translate-x-1">
+                                    <span>⚠</span>
+                                    <span>Risk Assessment</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xs font-bold text-gray-600 uppercase tracking-wider mb-4">Reports & Insights</h3>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="#suggestions" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500 hover:text-white transition-all duration-200 hover:translate-x-1">
+                                    <span>💡</span>
+                                    <span>AI Suggestions</span>
+                                    <span class="ml-auto bg-red-500 text-white text-xs px-2 py-1 rounded-full">NEW</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#competitor" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500 hover:text-white transition-all duration-200 hover:translate-x-1">
+                                    <span>🏆</span>
+                                    <span>Competitor Analysis</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#market" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500 hover:text-white transition-all duration-200 hover:translate-x-1">
+                                    <span>🌍</span>
+                                    <span>Market Research</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#timeline" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500 hover:text-white transition-all duration-200 hover:translate-x-1">
+                                    <span>📅</span>
+                                    <span>Implementation Timeline</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xs font-bold text-gray-600 uppercase tracking-wider mb-4">Resources</h3>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="#templates" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500 hover:text-white transition-all duration-200 hover:translate-x-1">
+                                    <span>📋</span>
+                                    <span>Business Templates</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#guides" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500 hover:text-white transition-all duration-200 hover:translate-x-1">
+                                    <span>📚</span>
+                                    <span>Startup Guides</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#community" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-500 hover:text-white transition-all duration-200 hover:translate-x-1">
+                                    <span>👥</span>
+                                    <span>Community Forum</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="flex-1 p-6 lg:p-8">
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-white/95 backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl">
+                        <!-- Header -->
+                        <div class="bg-gradient-to-r from-pink-500 to-orange-500 p-8 text-center relative overflow-hidden">
+                            <div class="absolute inset-0 bg-black/10"></div>
+                            <div class="relative z-10">
+                                <h1 class="text-3xl font-bold text-white mb-2">💡 Idea Validation Dashboard</h1>
+                                <p class="text-white/90">Transform Your Startup Idea into Reality</p>
+                            </div>
+                        </div>
+
+                        <div class="p-8">
+                            <!-- 🔥 DJANGO-READY FORM -->
+                            <form id="validationForm" method="POST" class="space-y-8">
+                                <!-- CSRF Token for Django -->
+                                <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                                
+                                <!-- Startup Idea -->
+                                <div class="space-y-3">
+                                    <label class="flex items-center gap-2 text-gray-800 font-semibold text-lg">
+                                        <div class="w-1 h-1 bg-pink-500 rounded-full"></div>💡 Describe Your Startup Idea
+                                    </label>
+                                    <textarea name="startup_idea" class="w-full p-4 bg-white border-2 border-gray-200 rounded-xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 transition-all duration-200 hover:-translate-y-0.5" rows="4" placeholder="Tell us about your innovative startup idea in 3-5 lines. What problem does it solve and how?" required></textarea>
+                                    <p class="text-gray-600 text-sm italic">Be specific about your unique value proposition</p>
+                                </div>
+
+                                <!-- Business Domain -->
+                                <div class="space-y-3">
+                                    <label class="flex items-center gap-2 text-gray-800 font-semibold text-lg">
+                                        <div class="w-1 h-1 bg-pink-500 rounded-full"></div>🏢 Business Domain
+                                    </label>
+                                    <select name="business_domain" class="w-full p-4 bg-white border-2 border-gray-200 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 transition-all duration-200 hover:-translate-y-0.5">
+                                        <option value="">Select your industry domain</option>
+                                        <option value="tech">Technology & Software</option>
+                                        <option value="health">Healthcare & Medical</option>
+                                        <option value="edtech">Education & EdTech</option>
+                                        <option value="fintech">Finance & FinTech</option>
+                                        <option value="ecommerce">E-commerce & Retail</option>
+                                        <option value="food">Food & Beverage</option>
+                                        <option value="transportation">Transportation & Logistics</option>
+                                        <option value="sustainability">Sustainability & Environment</option>
+                                        <option value="entertainment">Entertainment & Media</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+
+                                <!-- Problem Statement -->
+                                <div class="space-y-3">
+                                    <label class="flex items-center gap-2 text-gray-800 font-semibold text-lg">
+                                        <div class="w-1 h-1 bg-pink-500 rounded-full"></div>🎯 Core Problem Statement
+                                    </label>
+                                    <input type="text" name="problem_statement" class="w-full p-4 bg-white border-2 border-gray-200 rounded-xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 transition-all duration-200 hover:-translate-y-0.5" placeholder="What specific problem does your startup solve?" required>
+                                    <p class="text-gray-600 text-sm italic">Define the pain point your solution addresses</p>
+                                </div>
+
+                                <!-- Goals Section -->
+                                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-100 rounded-3xl p-8 relative">
+                                    <div class="flex items-center justify-between mb-6">
+                                        <div class="flex items-center gap-4">
+                                            <div class="w-10 h-10 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-white">📈</div>
+                                            <h3 class="text-xl font-bold text-gray-800">Startup Goals & Vision</h3>
+                                        </div>
+                                        <button type="button" onclick="showGuide()" class="w-8 h-8 bg-orange-500 hover:bg-orange-600 rounded-full flex items-center justify-center text-white font-bold transition-all duration-200 hover:scale-110 shadow-lg">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div class="space-y-3">
+                                            <label class="flex items-center gap-2 text-gray-800 font-semibold">
+                                                <div class="w-1 h-1 bg-pink-500 rounded-full"></div>🎯 Business Goal/Vision
+                                            </label>
+                                            <textarea name="business_goal" class="w-full p-4 bg-white border-2 border-gray-200 rounded-xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 transition-all duration-200 hover:-translate-y-0.5" rows="3" placeholder="What's your ultimate business vision?"></textarea>
+                                        </div>
+
+                                        <div class="space-y-3">
+                                            <label class="flex items-center gap-2 text-gray-800 font-semibold">
+                                                <div class="w-1 h-1 bg-pink-500 rounded-full"></div>💰 Monetization Strategy
+                                            </label>
+                                            <textarea name="monetization_strategy" class="w-full p-4 bg-white border-2 border-gray-200 rounded-xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 transition-all duration-200 hover:-translate-y-0.5" rows="3" placeholder="How do you plan to generate revenue?"></textarea>
+                                        </div>
+
+                                        <div class="space-y-3">
+                                            <label class="flex items-center gap-2 text-gray-800 font-semibold">
+                                                <div class="w-1 h-1 bg-pink-500 rounded-full"></div>🌍 Social Impact (Optional)
+                                            </label>
+                                            <textarea name="social_impact" class="w-full p-4 bg-white border-2 border-gray-200 rounded-xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 transition-all duration-200 hover:-translate-y-0.5" rows="3" placeholder="What positive change will you create?"></textarea>
+                                        </div>
+
+                                        <div class="space-y-3">
+                                            <label class="flex items-center gap-2 text-gray-800 font-semibold">
+                                                <div class="w-1 h-1 bg-pink-500 rounded-full"></div>⏱ Timeline & Expectations
+                                            </label>
+                                            <textarea name="timeline" class="w-full p-4 bg-white border-2 border-gray-200 rounded-xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 transition-all duration-200 hover:-translate-y-0.5" rows="3" placeholder="Short/long term goals and key milestones"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- AI Assistant Section -->
+                                <div class="bg-gradient-to-br from-gray-50 to-blue-50 border-2 border-gray-200 rounded-3xl p-6">
+                                    <div class="flex items-center gap-3 mb-6">
+                                        <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center">
+                                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                            </svg>
+                                        </div>
+                                        <h3 class="text-xl font-bold text-gray-800">AI Assistant</h3>
+                                        <div class="flex items-center gap-1 bg-green-500/20 px-3 py-1 rounded-full">
+                                            <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                                            <span class="text-green-600 text-sm font-medium">Online</span>
+                                        </div>
+                                    </div>
+
+                                    <div id="chatMessages" class="bg-white rounded-2xl p-4 max-h-80 overflow-y-auto mb-4 space-y-4 border border-gray-200">
+                                        <div class="flex gap-3 justify-start">
+                                            <div class="flex gap-3 max-w-[80%] flex-row">
+                                                <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-gradient-to-r from-blue-500 to-cyan-500">
+                                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                                    </svg>
+                                                </div>
+                                                <div class="p-3 rounded-2xl bg-gray-100 text-gray-800">
+                                                    <p class="text-sm leading-relaxed">Hi! I'm your AI assistant. I can help you refine your startup idea, suggest improvements, or answer any questions about the validation process. How can I assist you today?</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Chat composer -->
+                                    <div class="flex gap-3">
+                                        <input type="text" id="messageInput" placeholder="Ask me anything about your startup idea..." class="flex-1 p-3 bg-white border-2 border-gray-200 rounded-xl text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-200" onkeypress="handleKeyPress(event)">
+                                        <button type="button" onclick="sendMessageToAI()" class="p-3 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 rounded-xl text-white transition-all duration-200 hover:scale-105 shadow-lg">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="text-center pt-4">
+                                    <button type="submit" class="bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white px-12 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl shadow-lg relative overflow-hidden group">
+                                        <span class="relative z-10 flex items-center gap-2">🔍 Validate My Idea</span>
+                                        <div class="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Get CSRF token for Django
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        function showGuide() {
+            document.getElementById('guidePopup').classList.remove('hidden');
+        }
+
+        function closeGuide() {
+            document.getElementById('guidePopup').classList.add('hidden');
+        }
+
+        // AI Chat function - Django ke saath integrate
+        function sendMessageToAI() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            const chatMessages = document.getElementById('chatMessages');
+            
+            // Add user message
+            const userMessage = `
+                <div class="flex gap-3 justify-end">
+                    <div class="flex gap-3 max-w-[80%] flex-row-reverse">
+                        <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-gradient-to-r from-pink-500 to-orange-500">
+                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg>
+                        </div>
+                        <div class="p-3 rounded-2xl bg-gradient-to-r from-pink-500 to-orange-500 text-white">
+                            <p class="text-sm leading-relaxed">${message}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            chatMessages.innerHTML += userMessage;
+            input.value = '';
+
+            // Add typing indicator
+            const typingIndicator = `
+                <div id="typing" class="flex gap-3">
+                    <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center">
+                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <div class="bg-gray-100 p-3 rounded-2xl">
+                        <div class="flex gap-1">
+                            <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                            <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s;"></div>
+                            <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s;"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            chatMessages.innerHTML += typingIndicator;
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // 🔥 Django backend se AI response lena
+            fetch('/api/ai-chat/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify({
+                    message: message
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('typing').remove();
+                
+                const aiMessage = `
+                    <div class="flex gap-3 justify-start">
+                        <div class="flex gap-3 max-w-[80%] flex-row">
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-gradient-to-r from-blue-500 to-cyan-500">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <div class="p-3 rounded-2xl bg-gray-100 text-gray-800">
+                                <p class="text-sm leading-relaxed">${data.response}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                chatMessages.innerHTML += aiMessage;
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            })
+            .catch(error => {
+                // Fallback response agar Django backend nahi chala
+                document.getElementById('typing').remove();
+                const responses = [
+                    "That's an interesting idea! Have you considered the target market size for this solution?",
+                    "Great concept! I'd suggest focusing on the unique value proposition. What makes your solution different?",
+                    "This sounds promising! Have you validated this problem with potential customers yet?"
+                ];
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                
+                const aiMessage = `
+                    <div class="flex gap-3 justify-start">
+                        <div class="flex gap-3 max-w-[80%] flex-row">
+                            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-gradient-to-r from-blue-500 to-cyan-500">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <div class="p-3 rounded-2xl bg-gray-100 text-gray-800">
+                                <p class="text-sm leading-relaxed">${randomResponse}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                chatMessages.innerHTML += aiMessage;
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            });
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessageToAI();
+            }
+        }
+
+        // Form submission handler
+        document.getElementById('validationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            fetch('/validate-idea/', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken')
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Idea validation submitted successfully!');
+                    // Redirect to results page
+                    window.location.href = '/validation-results/';
+                } else {
+                    alert('Error: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Something went wrong. Please try again.');
+            });
+        });
+    </script>
+</body>
+</html>

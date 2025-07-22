@@ -1,0 +1,408 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/landing.css' %}">
+{% endblock %}
+
+
+{% block body %}
+    <!-- Parallax Background -->
+    <div class="parallax-bg"></div>
+
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    
+
+    <!-- Hero Section -->
+    <div class="main">
+        <div class="glass">
+            <section class="hero" id="hero">
+                <!-- <div class="floating-cards">
+                    <div class="floating-card"></div>
+                    <div class="floating-card"></div>
+                    <div class="floating-card"></div>
+                    <div class="floating-card"></div>
+                </div> -->
+
+                <div class="hero-content">
+                    <h1 class="hero-title">Validate Your Startup Vision</h1>
+                    <p class="hero-subtitle">
+                        Transform your ideas into successful ventures with AI-powered insights,
+                        comprehensive analysis, and strategic roadmaps that guide you to success.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="{% url 'dashboard' %}" class="btn-3d btn-primary-3d">
+                            <i class="fas fa-rocket" style="margin-right: 10px;"></i>
+                            Start Validating
+                        </a>
+                        <a href="#" class="btn-3d btn-secondary-3d">
+                            <i class="fas fa-play" style="margin-right: 10px;"></i>
+                            Watch Demo
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </div>
+
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title fade-in">Powerful Features</h2>
+            <p class="section-subtitle fade-in">
+                Comprehensive analysis tools designed to validate and refine your startup ideas
+            </p>
+
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="feature-title">Feasibility Analysis</h3>
+                    <p class="feature-description">
+                        Deep market research and technical feasibility assessment to determine if your idea can succeed
+                        in the real world.
+                    </p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h3 class="feature-title">Monetization Strategy</h3>
+                    <p class="feature-description">
+                        Discover multiple revenue streams and pricing strategies tailored to your business model and
+                        target market.
+                    </p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Risk Assessment</h3>
+                    <p class="feature-description">
+                        Identify potential challenges and market risks with actionable mitigation strategies to minimize
+                        failure.
+                    </p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-crosshairs"></i>
+                    </div>
+                    <h3 class="feature-title">SWOT Analysis</h3>
+                    <p class="feature-description">
+                        Comprehensive analysis of Strengths, Weaknesses, Opportunities, and Threats for strategic
+                        planning.
+                    </p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3 class="feature-title">Scoring System</h3>
+                    <p class="feature-description">
+                        Compare multiple ideas with our proprietary algorithm based on market potential and viability
+                        metrics.
+                    </p>
+                </div>
+
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-map"></i>
+                    </div>
+                    <h3 class="feature-title">Strategic Roadmap</h3>
+                    <p class="feature-description">
+                        Step-by-step execution plan with milestones, timelines, and actionable next steps for your
+                        startup journey.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title fade-in">How It Works</h2>
+            <p class="section-subtitle fade-in">
+                Four simple steps to transform your idea into a validated business concept
+            </p>
+
+            <div class="steps-container">
+                <div class="step-card slide-in-left">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Input Your Vision</h3>
+                    <p class="step-description">
+                        Share your startup idea, target market, and business goals through our intuitive interface.
+                    </p>
+                </div>
+
+                <div class="step-card slide-in-right">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">AI-Powered Analysis</h3>
+                    <p class="step-description">
+                        Our advanced AI analyzes market trends, competition, and business models to evaluate your
+                        concept.
+                    </p>
+                </div>
+
+                <div class="step-card slide-in-left">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Comprehensive Insights</h3>
+                    <p class="step-description">
+                        Receive detailed feedback including SWOT analysis, risk assessment, and monetization strategies.
+                    </p>
+                </div>
+
+                <div class="step-card slide-in-right">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Strategic Planning</h3>
+                    <p class="step-description">
+                        Get a detailed roadmap with scoring comparisons and actionable steps for execution.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title fade-in">Success Stories</h2>
+            <p class="section-subtitle fade-in">
+                Join thousands of entrepreneurs who transformed their ideas into thriving businesses
+            </p>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-avatar">S</div>
+                    <p class="testimonial-text">
+                        "The insights were incredible! Helped me pivot my SaaS idea early and avoid costly mistakes.
+                        Now running a successful $50k MRR business."
+                    </p>
+                    <div class="testimonial-author">Sarah Chen</div>
+                    <div class="testimonial-role">Tech Entrepreneur</div>
+                </div>
+
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-avatar">M</div>
+                    <p class="testimonial-text">
+                        "The market analysis saved me months of research. The scoring system helped me choose
+                        between 3 ideas. Best investment I made!"
+                    </p>
+                    <div class="testimonial-author">Mark Rodriguez</div>
+                    <div class="testimonial-role">E-commerce Founder</div>
+                </div>
+
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-avatar">A</div>
+                    <p class="testimonial-text">
+                        "The risk assessment was spot-on. Identified regulatory challenges I hadn't considered.
+                        The roadmap feature is pure gold!"
+                    </p>
+                    <div class="testimonial-author">Aisha Patel</div>
+                    <div class="testimonial-role">FinTech Startup</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="cta">
+        <div class="cta-content">
+            <h2 class="cta-title fade-in">Ready to Validate Your Next Big Idea?</h2>
+            <p class="cta-description fade-in">
+                Join over 10,000+ entrepreneurs who have successfully validated their startup ideas
+                and built thriving businesses with our comprehensive analysis platform.
+            </p>
+            <div class="hero-buttons fade-in">
+                <a href="#" class="btn-3d btn-primary-3d">
+                    <i class="fas fa-rocket" style="margin-right: 10px;"></i>
+                    Start Free Analysis
+                </a>
+                <a href="#" class="btn-3d btn-secondary-3d">
+                    <i class="fas fa-calendar" style="margin-right: 10px;"></i>
+                    Book a Demo
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Parallax effect
+        function handleParallax() {
+            const scrolled = window.pageYOffset;
+            const parallaxBg = document.querySelector('.parallax-bg');
+            const floatingCards = document.querySelectorAll('.floating-card');
+
+            parallaxBg.style.transform = `translateY(${scrolled * 0.5}px)`;
+
+            floatingCards.forEach((card, index) => {
+                const speed = 0.2 + (index * 0.1);
+                card.style.transform = `translateY(${scrolled * speed}px) rotateX(${scrolled * 0.01}deg) rotateY(${scrolled * 0.02}deg)`;
+            });
+        }
+
+        // Scroll animations
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right');
+
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Smooth scrolling for navigation
+        function setupSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Navbar scroll effect
+        function handleNavbarScroll() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.15)';
+                navbar.style.backdropFilter = 'blur(25px)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.1)';
+                navbar.style.backdropFilter = 'blur(20px)';
+            }
+        }
+
+        // Mouse movement effect for 3D cards
+        function setup3DCardEffect() {
+            const cards = document.querySelectorAll('.feature-card, .testimonial-card');
+
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+                });
+            });
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function () {
+            createParticles();
+            setupSmoothScrolling();
+            setup3DCardEffect();
+            handleScrollAnimations();
+        });
+
+        // Event listeners
+        window.addEventListener('scroll', () => {
+            handleParallax();
+            handleScrollAnimations();
+            handleNavbarScroll();
+        });
+
+        // Add some interactive button effects
+        document.querySelectorAll('.btn-3d').forEach(button => {
+            button.addEventListener('mouseenter', function () {
+                this.style.transform = 'translateY(-8px) scale(1.05)';
+            });
+
+            button.addEventListener('mouseleave', function () {
+                this.style.transform = 'translateY(0px) scale(1)';
+            });
+
+            button.addEventListener('mousedown', function () {
+                this.style.transform = 'translateY(-4px) scale(1.02)';
+            });
+
+            button.addEventListener('mouseup', function () {
+                this.style.transform = 'translateY(-8px) scale(1.05)';
+            });
+        });
+
+        // Add cursor trail effect
+        let mouseX = 0, mouseY = 0;
+        let trailElements = [];
+
+        function createCursorTrail() {
+            for (let i = 0; i < 10; i++) {
+                const trail = document.createElement('div');
+                trail.style.position = 'fixed';
+                trail.style.width = '6px';
+                trail.style.height = '6px';
+                trail.style.background = `rgba(255, 255, 255, ${0.8 - i * 0.08})`;
+                trail.style.borderRadius = '50%';
+                trail.style.pointerEvents = 'none';
+                trail.style.zIndex = '9999';
+                trail.style.transition = 'all 0.1s ease';
+                document.body.appendChild(trail);
+                trailElements.push(trail);
+            }
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            trailElements.forEach((trail, index) => {
+                setTimeout(() => {
+                    trail.style.left = mouseX + 'px';
+                    trail.style.top = mouseY + 'px';
+                }, index * 20);
+            });
+        });
+
+        // Initialize cursor trail
+        createCursorTrail();
+    </script>
+ {% endblock %}
+
+
+</html>

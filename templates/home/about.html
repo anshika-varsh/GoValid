@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us - ValidateAI</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    header {
+      padding: 20px 40px;
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      margin: 0;
+    }
+
+    .about-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 20px;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    .about-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 900px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .about-card h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #00e6e6;
+    }
+
+    .about-card p {
+      font-size: 1.1em;
+      line-height: 1.8;
+      color: #e0e0e0;
+    }
+
+    .features {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .feature {
+      background-color: rgba(255, 255, 255, 0.08);
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .feature:hover {
+      transform: translateY(-5px);
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .feature i {
+      font-size: 2em;
+      margin-bottom: 10px;
+      color: #00ffe6;
+    }
+
+    footer {
+      margin-top: 80px;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+      color: #ccc;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .about-card {
+        padding: 20px;
+      }
+
+      header h1 {
+        font-size: 2em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>About ValidateAI</h1>
+  </header>
+
+  <section class="about-container">
+    <div class="about-card">
+      <h2>Who We Are</h2>
+      <p>
+        ValidateAI is a platform designed to empower budding entrepreneurs by using Artificial Intelligence to validate their startup ideas in seconds. Our goal is to make idea validation fast, reliable, and insightful, so that innovators can move forward with confidence.
+      </p>
+
+      <p>
+        Whether you're a student, a startup founder, or just a curious thinker, ValidateAI gives you the tools to analyze your ideas and get feedback based on market trends, uniqueness, and feasibility.
+      </p>
+
+      <div class="features">
+        <div class="feature">
+          <i class="fas fa-brain"></i>
+          <h4>AI-Powered Insights</h4>
+          <p>Smart analysis backed by NLP and deep learning.</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-bolt"></i>
+          <h4>Instant Validation</h4>
+          <p>Submit your idea and get a response within seconds.</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-lightbulb"></i>
+          <h4>Idea Enhancement</h4>
+          <p>Not just validation — get suggestions to improve.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 ValidateAI. All rights reserved.
+  </footer>
+
+</body>
+</html>
