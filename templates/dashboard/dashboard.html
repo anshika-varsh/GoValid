@@ -258,9 +258,9 @@
 
                         <div class="p-8">
                             <!-- 🔥 DJANGO-READY FORM -->
-                            <form id="validationForm" method="POST" class="space-y-8">
-                                <!-- CSRF Token for Django -->
-                                <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                            <form id="validationForm" method="POST" action = "{% url 'dashboard' %}" class="space-y-8">
+                                {% csrf_token %}
+                                <input type="hidden" 
                                 
                                 <!-- Startup Idea -->
                                 <div class="space-y-3">
@@ -539,34 +539,7 @@
             }
         }
 
-        // Form submission handler
-        document.getElementById('validationForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            
-            fetch('/validate-idea/', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-CSRFToken': getCookie('csrftoken')
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Idea validation submitted successfully!');
-                    // Redirect to results page
-                    window.location.href = '/validation-results/';
-                } else {
-                    alert('Error: ' + data.error);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Something went wrong. Please try again.');
-            });
-        });
+        
     </script>
 </body>
 </html>
