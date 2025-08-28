@@ -624,11 +624,13 @@ Keep tone professional and concise. Just output clean HTML for these 3 boxes.
 
 @login_required
 def risk(request):
+    # Session se data lena
     startup_data = request.session.get("startup_data")
 
     if not startup_data:
         return redirect("dashboard:dashboard")
 
+    # Safely get values
     idea = startup_data.get('startup_idea', '')
     domain = startup_data.get('business_domain', '')
     problem = startup_data.get('problem_statement', '')
@@ -637,6 +639,7 @@ def risk(request):
     impact = startup_data.get('social_impact', '')
     timeline = startup_data.get('timeline', '')
 
+    # Prompt
     prompt = f"""
 You are an AI that must return ONLY valid HTML (no markdown, no plain text).
 Generate a <div class="risk-wrapper"> containing 4 <div class="risk-item"> blocks:
@@ -648,21 +651,35 @@ Generate a <div class="risk-wrapper"> containing 4 <div class="risk-item"> block
 Each block must look like:
 <div class="risk-item">
   <h3>🔹 Risk Name – LEVEL 🔴🟠🟢</h3>
-  <p>Reasoning text...</p>
+#   <p>Reasoning text...</p>
 </div>
+
+Startup idea: {idea}
+Domain: {domain}
+Problem: {problem}
+Goal: {goal}
+Monetization: {monetization}
+Impact: {impact}
+Timeline: {timeline}
 """
 
-    raw_html = generate_response(prompt)
+    # AI Response
+    raw_html = generate_response(prompt).strip()
 
-    latest_entry = Validate_form.objects.filter(user=request.user).order_by('-created_at').first()
+    # Latest entry update
+    latest_entry = (
+        Validate_form.objects.filter(user=request.user)
+        .order_by('-created_at')
+        .first()
+    )
+
     if latest_entry:
         latest_entry.risk_score = "N/A"
         latest_entry.risk_comment = raw_html
         latest_entry.save()
 
+    # Render template
     return render(request, "dashboard/risk.html", {"risk_html": raw_html})
-
-
 
 
 
