@@ -305,7 +305,7 @@ def dashboard(request):
 
 
 def generate_response(prompt):
-    api = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=AIzaSyCGqjrH4vDQVeKu_cepFVYxI5hy_rtJNQw"
+    api = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=AIzaSyCrlVU1wVBVr18be6rsab1aBlRZ5VtD2Ik"
                                                                                                     
     payload = {
         "contents": [{"parts": [{"text": prompt}]}]
