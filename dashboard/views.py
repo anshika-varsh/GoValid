@@ -16,7 +16,7 @@ from django.db.models import Avg
 from django.contrib.auth.models import User
 
 # API Key (ensure security in production)
-api_key = "AIzaSyCGqjrH4vDQVeKu_cepFVYxI5hy_rtJNQw"
+api_key = "AIzaSyCrlVU1wVBVr18be6rsab1aBlRZ5VtD2Ik"
 
 
 # ====================== PAGES ======================
